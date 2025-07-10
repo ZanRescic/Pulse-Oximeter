@@ -1,0 +1,14 @@
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c:1860:17:DMA_CalcBaseAndBitshift	17
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c:1990:13:DMA_CalcDMAMUXChannelBaseAndMask	4
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c:216:19:HAL_DMA_Init	38
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c:468:19:HAL_DMA_DeInit	24
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c:625:19:HAL_DMA_Start	37
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c:681:19:HAL_DMA_Start_IT	70
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c:781:19:HAL_DMA_Abort	48
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c:897:19:HAL_DMA_Abort_IT	9
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c:981:19:HAL_DMA_PollForTransfer	37
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c:1208:6:HAL_DMA_IRQHandler	62
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c:1578:19:HAL_DMA_RegisterCallback	10
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c:1645:19:HAL_DMA_UnRegisterCallback	11
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c:1736:22:HAL_DMA_GetState	1
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c:1747:10:HAL_DMA_GetError	1

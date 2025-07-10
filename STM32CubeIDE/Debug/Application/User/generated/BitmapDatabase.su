@@ -1,0 +1,2 @@
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/generated/images/src/BitmapDatabase.cpp:21:37:const touchgfx::Bitmap::BitmapData* BitmapDatabase::getInstance()	0	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/generated/images/src/BitmapDatabase.cpp:26:10:uint16_t BitmapDatabase::getInstanceSize()	0	static

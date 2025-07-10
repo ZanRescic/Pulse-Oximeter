@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="texts.xsd" Version="4.25.0">
+  <Languages>
+    <Language Id="GB" />
+  </Languages>
+  <Texts>
+    <TextGroup Id="Group1" />
+    <TextGroup Id="Unsorted">
+      <Text Id="spo2_data" Alignment="Left" TypographyId="TextAreas">
+        <Translation Language="GB"></Translation>
+      </Text>
+      <Text Id="__SingleUse_ED91" Alignment="Center" TypographyId="TextAreas">
+        <Translation Language="GB">&lt;value&gt; %</Translation>
+      </Text>
+      <Text Id="hr_data" Alignment="Left" TypographyId="TextAreas">
+        <Translation Language="GB"></Translation>
+      </Text>
+      <Text Id="__SingleUse_MADA" Alignment="Center" TypographyId="TextAreas">
+        <Translation Language="GB">&lt;value&gt; Bpm</Translation>
+      </Text>
+      <Text Id="__SingleUse_4PEZ" Alignment="Center" TypographyId="TextAreas">
+        <Translation Language="GB">SpO2 Value:</Translation>
+      </Text>
+      <Text Id="__SingleUse_FE3G" Alignment="Center" TypographyId="TextAreas">
+        <Translation Language="GB">HR Value:</Translation>
+      </Text>
+      <Text Id="__SingleUse_NOMS" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">Pulse Oximeter</Translation>
+      </Text>
+      <Text Id="__SingleUse_T77T" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">Start</Translation>
+      </Text>
+      <Text Id="__SingleUse_9XXE" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">Pulse Oximeter</Translation>
+      </Text>
+    </TextGroup>
+  </Texts>
+  <Typographies>
+    <Typography Id="Default" Font="Siemens_TIA_Portal_basic_bold.ttf" Size="30" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
+    <Typography Id="Large" Font="Siemens_TIA_Portal_basic_bold.ttf" Size="40" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
+    <Typography Id="Small" Font="verdana.ttf" Size="10" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
+    <Typography Id="Typography_00" Font="verdana.ttf" Size="20" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
+    <Typography Id="TextAreas" Font="Siemens_TIA_Portal_basic_bold.ttf" Size="25" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
+  </Typographies>
+</TextDatabase>

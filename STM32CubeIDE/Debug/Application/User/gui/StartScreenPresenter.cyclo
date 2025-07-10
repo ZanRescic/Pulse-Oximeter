@@ -1,0 +1,6 @@
+../../TouchGFX/gui/include/gui/startscreen_screen/StartScreenPresenter.hpp:28:13:StartScreenPresenter::~StartScreenPresenter()	1
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/gui/src/startscreen_screen/StartScreenPresenter.cpp:10:6:virtual void StartScreenPresenter::activate()	1
+../../TouchGFX/gui/include/gui/startscreen_screen/StartScreenPresenter.hpp:28:13:virtual StartScreenPresenter::~StartScreenPresenter()	1
+../../TouchGFX/gui/include/gui/startscreen_screen/StartScreenPresenter.hpp:28:13:virtual void* StartScreenPresenter::_ZThn4_N20StartScreenPresenterD1Ev()	1
+../../TouchGFX/gui/include/gui/startscreen_screen/StartScreenPresenter.hpp:28:13:virtual void* StartScreenPresenter::_ZThn4_N20StartScreenPresenterD0Ev()	1
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/gui/src/startscreen_screen/StartScreenPresenter.cpp:4:1:StartScreenPresenter::StartScreenPresenter(StartScreenView&)	1

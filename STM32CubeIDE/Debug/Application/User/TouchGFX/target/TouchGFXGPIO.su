@@ -1,0 +1,5 @@
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/target/TouchGFXGPIO.cpp:58:6:static void touchgfx::GPIO::init()	8	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/target/TouchGFXGPIO.cpp:72:6:static void touchgfx::GPIO::set(GPIO_ID)	0	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/target/TouchGFXGPIO.cpp:102:6:static void touchgfx::GPIO::clear(GPIO_ID)	0	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/target/TouchGFXGPIO.cpp:132:6:static void touchgfx::GPIO::toggle(GPIO_ID)	0	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/target/TouchGFXGPIO.cpp:162:6:static bool touchgfx::GPIO::get(GPIO_ID)	8	static

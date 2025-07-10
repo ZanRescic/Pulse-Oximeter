@@ -1,0 +1,6 @@
+../../TouchGFX/gui/include/gui/datascreen_screen/DataScreenPresenter.hpp:28:13:DataScreenPresenter::~DataScreenPresenter()	1
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/gui/src/datascreen_screen/DataScreenPresenter.cpp:10:6:virtual void DataScreenPresenter::activate()	1
+../../TouchGFX/gui/include/gui/datascreen_screen/DataScreenPresenter.hpp:28:13:virtual DataScreenPresenter::~DataScreenPresenter()	1
+../../TouchGFX/gui/include/gui/datascreen_screen/DataScreenPresenter.hpp:28:13:virtual void* DataScreenPresenter::_ZThn4_N19DataScreenPresenterD1Ev()	1
+../../TouchGFX/gui/include/gui/datascreen_screen/DataScreenPresenter.hpp:28:13:virtual void* DataScreenPresenter::_ZThn4_N19DataScreenPresenterD0Ev()	1
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/gui/src/datascreen_screen/DataScreenPresenter.cpp:4:1:DataScreenPresenter::DataScreenPresenter(DataScreenView&)	1

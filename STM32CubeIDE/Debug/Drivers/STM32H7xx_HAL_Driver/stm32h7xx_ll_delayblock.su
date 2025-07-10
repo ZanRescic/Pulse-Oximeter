@@ -1,0 +1,3 @@
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_delayblock.c:101:19:DelayBlock_Enable	48	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_delayblock.c:171:19:DelayBlock_Disable	0	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_delayblock.c:185:19:DelayBlock_Configure	4	static

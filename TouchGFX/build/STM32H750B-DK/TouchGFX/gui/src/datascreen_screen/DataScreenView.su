@@ -1,0 +1,10 @@
+Screen.hpp:104:18:virtual void touchgfx::Screen::afterTransition()	0	static
+Screen.hpp:144:18:virtual void touchgfx::Screen::handleTickEvent()	0	static
+Screen.hpp:154:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	0	static
+DataScreenViewBase.hpp:26:18:virtual void DataScreenViewBase::Update_HR()	0	static
+DataScreenViewBase.hpp:31:18:virtual void DataScreenViewBase::Update_SpO2()	0	static
+DataScreenView.cpp:13:6:virtual void DataScreenView::tearDownScreen()	0	static
+DataScreenView.hpp:11:13:DataScreenView::~DataScreenView()	8	static
+DataScreenView.hpp:11:13:virtual DataScreenView::~DataScreenView()	8	static
+DataScreenView.cpp:3:1:DataScreenView::DataScreenView()	8	static
+DataScreenView.cpp:8:6:virtual void DataScreenView::setupScreen()	0	static

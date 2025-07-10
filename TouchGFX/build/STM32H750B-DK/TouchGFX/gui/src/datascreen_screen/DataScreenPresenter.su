@@ -1,0 +1,5 @@
+DataScreenPresenter.hpp:28:13:DataScreenPresenter::~DataScreenPresenter()	0	static
+DataScreenPresenter.cpp:10:6:virtual void DataScreenPresenter::activate()	0	static
+DataScreenPresenter.hpp:28:13:virtual DataScreenPresenter::~DataScreenPresenter()	8	static
+DataScreenPresenter.hpp:28:13:virtual void* DataScreenPresenter::_ZThn4_N19DataScreenPresenterD1Ev()	0	static
+DataScreenPresenter.cpp:4:1:DataScreenPresenter::DataScreenPresenter(DataScreenView&)	8	static
