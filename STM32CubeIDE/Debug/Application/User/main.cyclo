@@ -1,7 +1,10 @@
-D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:715:6:StartDefaultTask	1
-D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:733:6:InitializeEquipment	1
-D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:751:6:CalculateData	1
-D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:249:6:SystemClock_Config	2
-D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:133:5:main	5
-D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:842:6:HAL_TIM_PeriodElapsedCallback	2
-D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:860:6:Error_Handler	1
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:830:6:StartDefaultTask	1
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:848:6:InitializeEquipment	1
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:866:6:CalculateData	1
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:273:9:maxSpo2	3
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:283:9:getHeartRate	10
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:292:6:bubbleSort	6
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:316:6:SystemClock_Config	2
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:160:5:main	5
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:957:6:HAL_TIM_PeriodElapsedCallback	2
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:975:6:Error_Handler	1

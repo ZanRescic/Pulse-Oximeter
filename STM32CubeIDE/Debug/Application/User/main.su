@@ -1,7 +1,10 @@
-D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:715:6:StartDefaultTask	8	static
-D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:733:6:InitializeEquipment	8	static
-D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:751:6:CalculateData	8	static
-D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:249:6:SystemClock_Config	136	static
-D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:133:5:main	112	static,ignoring_inline_asm
-D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:842:6:HAL_TIM_PeriodElapsedCallback	0	static
-D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:860:6:Error_Handler	0	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:830:6:StartDefaultTask	8	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:848:6:InitializeEquipment	8	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:866:6:CalculateData	8	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:273:9:maxSpo2	8	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:283:9:getHeartRate	16	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:292:6:bubbleSort	12	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:316:6:SystemClock_Config	136	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:160:5:main	112	static,ignoring_inline_asm
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:957:6:HAL_TIM_PeriodElapsedCallback	0	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/Core/Src/main.c:975:6:Error_Handler	0	static

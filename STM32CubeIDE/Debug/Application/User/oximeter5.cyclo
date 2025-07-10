@@ -1,0 +1,16 @@
+../Application/User/oximeter5.c:597:13:dev_find_peaks.constprop	25
+../Application/User/oximeter5.c:65:7:oximeter5_init	2
+../Application/User/oximeter5.c:75:7:oximeter5_default_cfg	1
+../Application/User/oximeter5.c:135:7:oximeter5_generic_write	1
+../Application/User/oximeter5.c:141:7:oximeter5_generic_read	1
+../Application/User/oximeter5.c:147:9:oximeter5_check_interrupt	1
+../Application/User/oximeter5.c:152:7:oximeter5_sw_reset	1
+../Application/User/oximeter5.c:162:7:oximeter5_read_temperature	2
+../Application/User/oximeter5.c:187:7:oximeter5_set_fifo_wr_pointer	1
+../Application/User/oximeter5.c:192:7:oximeter5_set_fifo_rd_pointer	1
+../Application/User/oximeter5.c:197:7:oximeter5_set_fifo_cfg	1
+../Application/User/oximeter5.c:208:7:oximeter5_set_mode_cfg	1
+../Application/User/oximeter5.c:215:7:oximeter5_set_spo2_cfg	1
+../Application/User/oximeter5.c:226:7:oximeter5_read_sensor_data	1
+../Application/User/oximeter5.c:249:7:oximeter5_get_oxygen_saturation	33
+../Application/User/oximeter5.c:419:7:oximeter5_get_heart_rate	35

@@ -58,6 +58,7 @@ Application/User/main.o: \
  ../../Middlewares/Third_Party/LibJPEG/include/jpeglib.h \
  ../../LIBJPEG/Target/jconfig.h ../../LIBJPEG/Target/jdata_conf.h \
  ../../LIBJPEG/Target/jmorecfg.h ../../TouchGFX/App/app_touchgfx.h \
+ ../../Core/Inc/oximeter5.h \
  ../../Drivers/BSP/STM32H750B-DK/stm32h750b_discovery_qspi.h \
  ../../Core/Inc/stm32h750b_discovery_conf.h \
  ../../Drivers/BSP/STM32H750B-DK/stm32h750b_discovery_errno.h \
@@ -126,6 +127,7 @@ Application/User/main.o: \
 ../../LIBJPEG/Target/jdata_conf.h:
 ../../LIBJPEG/Target/jmorecfg.h:
 ../../TouchGFX/App/app_touchgfx.h:
+../../Core/Inc/oximeter5.h:
 ../../Drivers/BSP/STM32H750B-DK/stm32h750b_discovery_qspi.h:
 ../../Core/Inc/stm32h750b_discovery_conf.h:
 ../../Drivers/BSP/STM32H750B-DK/stm32h750b_discovery_errno.h:

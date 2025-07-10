@@ -22,6 +22,10 @@
 #include "cmsis_os.h"
 #include "libjpeg.h"
 #include "app_touchgfx.h"
+#include "oximeter5.h"
+#include <string.h>
+#include <stdio.h>
+#include <stdint.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -41,7 +45,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
 
-//"2C added manually, tasks/threads, queues, uart added through .ioc file
+//I2C added manually, tasks/threads, queues, uart added through .ioc file
 
 /* USER CODE END PM */
 
@@ -62,6 +66,8 @@ QSPI_HandleTypeDef hqspi;
 UART_HandleTypeDef huart3;
 
 SDRAM_HandleTypeDef hsdram2;
+
+I2C_HandleTypeDef hi2c4;
 
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
@@ -97,7 +103,25 @@ const osMessageQueueAttr_t dataQueue_attributes = {
   .name = "dataQueue"
 };
 /* USER CODE BEGIN PV */
+#define BUFFER_SIZE 100
+static uint32_t aun_ir_buffer[ BUFFER_SIZE ]; //infra red LED buffer 100
+static uint32_t aun_red_buffer[ BUFFER_SIZE ]; //red LED buffer 100
+static uint32_t un_min, un_max, un_prev_data, un_brightness;
+static float f_temp;
+static uint8_t n_spo2;
+static uint8_t max_spo2;
+static int32_t n_heart_rate;
+static int32_t valid_heart_rate;
+static uint8_t spo2_array[25];
+static int32_t hr_array[25];
+static uint32_t counter;
 
+typedef struct HealthData{
+	int32_t hr;
+	uint8_t sp02;
+};
+
+struct HealthData healthData = {0, 0};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -112,13 +136,16 @@ static void MX_FMC_Init(void);
 static void MX_JPEG_Init(void);
 static void MX_CRC_Init(void);
 static void MX_USART3_UART_Init(void);
+static void MX_I2C4_Init(void);
 void StartDefaultTask(void *argument);
 extern void TouchGFX_Task(void *argument);
 void InitializeEquipment(void *argument);
 void CalculateData(void *argument);
 
 /* USER CODE BEGIN PFP */
-
+uint8_t maxSpo2(uint8_t *array, int size);
+int32_t getHeartRate(int32_t *array, int size);
+void bubbleSort(int32_t *array, int size);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -175,6 +202,7 @@ int main(void)
   MX_JPEG_Init();
   MX_CRC_Init();
   MX_USART3_UART_Init();
+  MX_I2C4_Init();
   MX_TouchGFX_Init();
   /* Call PreOsInit function */
   MX_TouchGFX_PreOSInit();
@@ -240,6 +268,45 @@ int main(void)
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
+}
+
+uint8_t maxSpo2(uint8_t *array, int size) {
+	uint8_t max = array[0];
+	for (uint8_t i = 1; i < size; i++) {
+		if (max < array[i])
+			max = array[i];
+	}
+	memset(array, 0, size);
+	return max;
+}
+
+int32_t getHeartRate(int32_t *array, int size) {
+	bubbleSort(array, size);
+	if (size % 2 == 0) {
+		return (array[size / 2 - 1] + array[size / 2]) / 2;
+	} else {
+		return array[size / 2];
+	}
+}
+
+void bubbleSort(int32_t *array, int size) {
+    int32_t temp;
+    int swapped;
+
+    for (size_t i = 0; i < size - 1; i++) {
+        swapped = 0;
+        for (size_t j = 0; j < size - i - 1; j++) {
+            if (array[j] > array[j + 1]) {
+                temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+                swapped = 1;
+            }
+        }
+        if (!swapped) {
+            break;
+        }
+    }
 }
 
 /**
@@ -456,6 +523,54 @@ static void MX_LTDC_Init(void)
   /* USER CODE BEGIN LTDC_Init 2 */
 
   /* USER CODE END LTDC_Init 2 */
+
+}
+
+/**
+  * @brief I2C4 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C4_Init(void)
+{
+
+  /* USER CODE BEGIN I2C4_Init 0 */
+
+  /* USER CODE END I2C4_Init 0 */
+
+  /* USER CODE BEGIN I2C4_Init 1 */
+
+  /* USER CODE END I2C4_Init 1 */
+  hi2c4.Instance = I2C4;
+  hi2c4.Init.Timing = 0x10707DBC;
+  hi2c4.Init.OwnAddress1 = 0;
+  hi2c4.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c4.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c4.Init.OwnAddress2 = 0;
+  hi2c4.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+  hi2c4.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c4.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c4) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Analogue filter
+  */
+  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c4, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Digital filter
+  */
+  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c4, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C4_Init 2 */
+
+  /* USER CODE END I2C4_Init 2 */
 
 }
 
