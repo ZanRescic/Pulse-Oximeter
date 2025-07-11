@@ -266,6 +266,43 @@ int main(void)
   }
   /* USER CODE END 3 */
 }
+uint8_t maxSpo2(uint8_t *array, int size) {
+	uint8_t max = array[0];
+	for (uint8_t i = 1; i < size; i++) {
+		if (max < array[i])
+			max = array[i];
+	}
+	memset(array, 0, size);
+	return max;
+}
+
+int32_t getHeartRate(int32_t *array, int size) {
+	bubbleSort(array, size);
+	if (size % 2 == 0) {
+		return (array[size / 2 - 1] + array[size / 2]) / 2;
+	} else {
+		return array[size / 2];
+	}
+}
+
+void bubbleSort(int32_t *array, int size) {
+    int32_t temp;
+    int swapped;
+    for (size_t i = 0; i < size - 1; i++) {
+        swapped = 0;
+        for (size_t j = 0; j < size - i - 1; j++) {
+            if (array[j] > array[j + 1]) {
+                temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+                swapped = 1;
+            }
+        }
+        if (!swapped) {
+            break;
+        }
+    }
+}
 
 /**
   * @brief System Clock Configuration
@@ -770,6 +807,14 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(MCU_ACTIVE_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pins : PD12 PD13 */
+  GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_13;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Alternate = GPIO_AF4_I2C4;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
   /* USER CODE BEGIN MX_GPIO_Init_2 */
   /* USER CODE END MX_GPIO_Init_2 */
 }
@@ -791,7 +836,7 @@ void StartDefaultTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(100);
+	  osDelay(1);
   }
   /* USER CODE END 5 */
 }
@@ -807,10 +852,33 @@ void InitializeEquipment(void *argument)
 {
   /* USER CODE BEGIN InitializeEquipment */
   /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
+	oximeter5_init();
+	osDelay(100);
+	oximeter5_default_cfg();
+	osDelay(100);
+	un_brightness = 0;
+	un_min = 0x3FFFF;
+	un_max = 0;
+
+	for ( uint8_t n_cnt = 0; n_cnt < 100; n_cnt++ )
+	{
+		while ( oximeter5_check_interrupt() == OXIMETER5_INTERRUPT_ACTIVE );
+
+		oximeter5_read_sensor_data(&aun_ir_buffer[ n_cnt ], &aun_red_buffer[ n_cnt ] );
+
+		if ( un_min > aun_red_buffer[ n_cnt ] )
+		{
+			un_min = aun_red_buffer[ n_cnt ];
+		}
+
+		if ( un_max < aun_red_buffer[ n_cnt ] )
+		{
+			un_max = aun_red_buffer[ n_cnt ];
+		}
+	}
+	osDelay(100);
+	//Deleting the task because it's supposed to run once, to init the sensor
+	vTaskDelete(NULL);
   /* USER CODE END InitializeEquipment */
 }
 
