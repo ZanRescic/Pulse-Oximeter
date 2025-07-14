@@ -14,6 +14,9 @@ public:
     {
         model = m;
     }
+    virtual void Update_HR(int32_t hr);
+
+	virtual void Update_SpO2(uint8_t sp02);
 protected:
     Model* model;
 };

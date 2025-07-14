@@ -2,6 +2,8 @@
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:144:18:virtual void touchgfx::Screen::handleTickEvent()	1
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:154:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	1
 D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/gui/src/startscreen_screen/StartScreenView.cpp:13:6:virtual void StartScreenView::tearDownScreen()	1
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/gui/src/startscreen_screen/StartScreenView.cpp:18:6:virtual void StartScreenView::Update_HR(int32_t)	1
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/gui/src/startscreen_screen/StartScreenView.cpp:23:6:virtual void StartScreenView::Update_SpO2(uint8_t)	1
 ../../TouchGFX/gui/include/gui/startscreen_screen/StartScreenView.hpp:11:13:StartScreenView::~StartScreenView()	1
 ../../TouchGFX/gui/include/gui/startscreen_screen/StartScreenView.hpp:11:13:virtual StartScreenView::~StartScreenView()	1
 D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/gui/src/startscreen_screen/StartScreenView.cpp:3:1:StartScreenView::StartScreenView()	1

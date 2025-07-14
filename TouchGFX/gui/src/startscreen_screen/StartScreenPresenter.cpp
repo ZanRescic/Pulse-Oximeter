@@ -16,3 +16,13 @@ void StartScreenPresenter::deactivate()
 {
 
 }
+
+void StartScreenPresenter::Update_HR(int32_t hr)
+{
+
+}
+
+void StartScreenPresenter::Update_SpO2(uint8_t sp02)
+{
+
+}

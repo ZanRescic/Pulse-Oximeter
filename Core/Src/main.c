@@ -23,6 +23,7 @@
 #include "libjpeg.h"
 #include "app_touchgfx.h"
 #include "oximeter5.h"
+#include <string.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -85,13 +86,13 @@ osThreadId_t initTaskHandle;
 const osThreadAttr_t initTask_attributes = {
   .name = "initTask",
   .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+  .priority = (osPriority_t) osPriorityHigh,
 };
 /* Definitions for calcData */
 osThreadId_t calcDataHandle;
 const osThreadAttr_t calcData_attributes = {
   .name = "calcData",
-  .stack_size = 128 * 4,
+  .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for dataQueue */
@@ -101,6 +102,8 @@ const osMessageQueueAttr_t dataQueue_attributes = {
 };
 /* USER CODE BEGIN PV */
 #define BUFFER_SIZE 100
+
+char sendBuffer[BUFFER_SIZE];
 static uint32_t aun_ir_buffer[ BUFFER_SIZE ]; //infra red LED buffer 100
 static uint32_t aun_red_buffer[ BUFFER_SIZE ]; //red LED buffer 100
 static uint32_t un_min, un_max, un_prev_data, un_brightness;
@@ -111,14 +114,14 @@ static int32_t n_heart_rate;
 static int32_t valid_heart_rate;
 static uint8_t spo2_array[25];
 static int32_t hr_array[25];
-static uint32_t counter;
+static int counter;
 
-typedef struct HealthData{
+typedef struct {
 	int32_t hr;
 	uint8_t sp02;
-};
+}HealthData;
 
-struct HealthData healthData = {0, 0};
+HealthData healthData;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -836,7 +839,58 @@ void StartDefaultTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-	  osDelay(1);
+	for ( uint8_t n_cnt = 25; n_cnt < 100; n_cnt++ ){
+		aun_red_buffer[ n_cnt - 25 ] = aun_red_buffer[ n_cnt ];
+		aun_ir_buffer[ n_cnt - 25 ] = aun_ir_buffer[ n_cnt ];
+
+		if ( un_min > aun_red_buffer[ n_cnt ] )
+		{
+			un_min = aun_red_buffer[ n_cnt ];
+		}
+
+		if ( un_max < aun_red_buffer[ n_cnt ] )
+		{
+			un_max=aun_red_buffer[n_cnt];
+		}
+	}
+
+	for ( uint8_t n_cnt = 75; n_cnt < 100; n_cnt++ ){
+		un_prev_data = aun_red_buffer[ n_cnt - 1 ];
+		while ( oximeter5_check_interrupt() == OXIMETER5_INTERRUPT_ACTIVE );
+
+		oximeter5_read_sensor_data(&aun_ir_buffer[ n_cnt ], &aun_red_buffer[ n_cnt ]);
+
+		if ( aun_red_buffer[ n_cnt ] > un_prev_data )
+		{
+			f_temp = aun_red_buffer[ n_cnt ]-un_prev_data;
+			f_temp /= ( un_max - un_min );
+			f_temp *= MAX_BRIGHTNESS;
+			f_temp = un_brightness - f_temp;
+
+			if ( f_temp < 0 )
+			{
+				un_brightness = 0;
+			}
+			else
+			{
+				un_brightness = ( uint32_t ) f_temp;
+			}
+		}
+		else
+		{
+			f_temp = un_prev_data - aun_red_buffer[ n_cnt ];
+			f_temp /= ( un_max - un_min );
+			f_temp *= MAX_BRIGHTNESS;
+			un_brightness += ( uint32_t ) f_temp;
+
+			if ( un_brightness > MAX_BRIGHTNESS )
+			{
+				un_brightness = MAX_BRIGHTNESS;
+			}
+		}
+		oximeter5_read_temperature(&f_temp);
+	}
+	osDelay(40);
   }
   /* USER CODE END 5 */
 }
@@ -895,7 +949,30 @@ void CalculateData(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	oximeter5_get_oxygen_saturation(&aun_ir_buffer[ 0 ], 100, &aun_red_buffer[ 0 ], &n_spo2 );
+	oximeter5_get_heart_rate( &aun_ir_buffer[ 0 ], 100, &aun_red_buffer[ 0 ], &n_heart_rate );
+
+	if (n_spo2 <= 100 && n_heart_rate > 30 && n_heart_rate < 180) {
+		spo2_array[counter] = n_spo2;
+		hr_array[counter] = n_heart_rate;
+		counter++;
+	}
+
+	if (counter == 10) {
+		max_spo2 = maxSpo2(spo2_array, (sizeof(spo2_array) / sizeof(spo2_array[0])));
+		valid_heart_rate = getHeartRate(hr_array, (sizeof(hr_array) / sizeof(hr_array[0])));
+
+		//snprintf(SendBuffer,BUFSIZE,"\tSPO2: %u %%\r\n", max_spo2);
+		//HAL_UART_Transmit(&huart3,SendBuffer,strlen(SendBuffer),100);
+
+		//snprintf(SendBuffer,BUFSIZE,"\tHR: %ld %\r\n", valid_heart_rate);
+		//HAL_UART_Transmit(&huart3,SendBuffer,strlen(SendBuffer),100);
+		healthData.hr = valid_heart_rate;
+		healthData.sp02 = max_spo2;
+		osMessageQueuePut(dataQueueHandle, &healthData, 0, 0);
+		counter = 0;
+	}
+    osDelay(10);
   }
   /* USER CODE END CalculateData */
 }
