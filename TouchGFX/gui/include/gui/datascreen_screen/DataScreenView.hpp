@@ -15,6 +15,7 @@ public:
     virtual void Update_HR(int32_t hr);
     virtual void Update_SpO2(uint8_t sp02);
 protected:
+    float smoothedInterval = 0;
 };
 
 #endif // DATASCREENVIEW_HPP

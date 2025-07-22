@@ -227,7 +227,7 @@ int main(void)
 
   /* Create the queue(s) */
   /* creation of dataQueue */
-  dataQueueHandle = osMessageQueueNew (16, sizeof(uint16_t), &dataQueue_attributes);
+  dataQueueHandle = osMessageQueueNew (16, sizeof(HealthData), &dataQueue_attributes);
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */

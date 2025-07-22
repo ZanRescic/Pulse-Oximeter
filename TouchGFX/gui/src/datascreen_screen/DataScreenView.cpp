@@ -1,5 +1,4 @@
 #include <gui/datascreen_screen/DataScreenView.hpp>
-static float smoothedInterval = 0;
 DataScreenView::DataScreenView()
 {
 
