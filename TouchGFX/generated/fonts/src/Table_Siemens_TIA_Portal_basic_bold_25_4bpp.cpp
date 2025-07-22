@@ -6,21 +6,30 @@ FONT_TABLE_LOCATION_FLASH_PRAGMA
 KEEP extern const touchgfx::GlyphNode glyphs_Siemens_TIA_Portal_basic_bold_25_4bpp[] FONT_TABLE_LOCATION_FLASH_ATTRIBUTE = {
     {     0, 0x0020,   0,   0,   0,   0,   6,   0,   0, 0x00 }, // space
     {     0, 0x0025,  19,  17,  17,   0,  19,   0,   0, 0x00 }, // percent
-    {   170, 0x0032,  12,  17,  17,   1,  14,   0,   0, 0x00 }, // two
-    {   272, 0x003A,   4,  13,  13,   3,  10,   0,   0, 0x00 }, // colon
-    {   298, 0x003F,  10,  17,  17,   1,  11,   0,   0, 0x00 }, // question
-    {   383, 0x0042,  12,  17,  17,   2,  15,   0,   0, 0x00 }, // B
-    {   485, 0x0048,  14,  17,  17,   2,  18,   0,   0, 0x00 }, // H
-    {   604, 0x004F,  17,  17,  17,   1,  19,   0,   0, 0x00 }, // O
-    {   757, 0x0052,  13,  17,  17,   2,  15,   0,   0, 0x00 }, // R
-    {   876, 0x0053,  12,  17,  17,   1,  14,   0,   0, 0x00 }, // S
-    {   978, 0x0056,  16,  17,  17,   0,  16,   0,   0, 0x00 }, // V
-    {  1114, 0x0061,  11,  13,  13,   1,  14,   0,   0, 0x00 }, // a
-    {  1192, 0x0065,  13,  13,  13,   1,  14,   0,   0, 0x00 }, // e
-    {  1283, 0x006C,   3,  18,  18,   2,   7,   0,   0, 0x00 }, // l
-    {  1319, 0x006D,  19,  13,  13,   2,  23,   0,   0, 0x00 }, // m
-    {  1449, 0x0070,  13,  18,  13,   1,  15,   0,   0, 0x00 }, // p
-    {  1575, 0x0075,  12,  13,  13,   2,  15,   0,   0, 0x00 }  // u
+    {   170, 0x0030,  13,  17,  17,   1,  14,   0,   0, 0x00 }, // zero
+    {   289, 0x0031,   8,  17,  17,   2,  14,   0,   0, 0x00 }, // one
+    {   357, 0x0032,  12,  17,  17,   1,  14,   0,   0, 0x00 }, // two
+    {   459, 0x0033,  12,  17,  17,   1,  14,   0,   0, 0x00 }, // three
+    {   561, 0x0034,  14,  17,  17,   0,  14,   0,   0, 0x00 }, // four
+    {   680, 0x0035,  12,  17,  17,   1,  14,   0,   0, 0x00 }, // five
+    {   782, 0x0036,  13,  17,  17,   1,  14,   0,   0, 0x00 }, // six
+    {   901, 0x0037,  12,  17,  17,   1,  14,   0,   0, 0x00 }, // seven
+    {  1003, 0x0038,  13,  17,  17,   1,  14,   0,   0, 0x00 }, // eight
+    {  1122, 0x0039,  12,  17,  17,   1,  14,   0,   0, 0x00 }, // nine
+    {  1224, 0x003A,   4,  13,  13,   3,  10,   0,   0, 0x00 }, // colon
+    {  1250, 0x003F,  10,  17,  17,   1,  11,   0,   0, 0x00 }, // question
+    {  1335, 0x0042,  12,  17,  17,   2,  15,   0,   0, 0x00 }, // B
+    {  1437, 0x0048,  14,  17,  17,   2,  18,   0,   0, 0x00 }, // H
+    {  1556, 0x004F,  17,  17,  17,   1,  19,   0,   0, 0x00 }, // O
+    {  1709, 0x0052,  13,  17,  17,   2,  15,   0,   0, 0x00 }, // R
+    {  1828, 0x0053,  12,  17,  17,   1,  14,   0,   0, 0x00 }, // S
+    {  1930, 0x0056,  16,  17,  17,   0,  16,   0,   0, 0x00 }, // V
+    {  2066, 0x0061,  11,  13,  13,   1,  14,   0,   0, 0x00 }, // a
+    {  2144, 0x0065,  13,  13,  13,   1,  14,   0,   0, 0x00 }, // e
+    {  2235, 0x006C,   3,  18,  18,   2,   7,   0,   0, 0x00 }, // l
+    {  2271, 0x006D,  19,  13,  13,   2,  23,   0,   0, 0x00 }, // m
+    {  2401, 0x0070,  13,  18,  13,   1,  15,   0,   0, 0x00 }, // p
+    {  2527, 0x0075,  12,  13,  13,   2,  15,   0,   0, 0x00 }  // u
 };
 
 // Siemens_TIA_Portal_basic_bold_25_4bpp
@@ -187,6 +196,6 @@ touchgfx::GeneratedFont& getFont_Siemens_TIA_Portal_basic_bold_25_4bpp();
 
 touchgfx::GeneratedFont& getFont_Siemens_TIA_Portal_basic_bold_25_4bpp()
 {
-    static touchgfx::GeneratedFont Siemens_TIA_Portal_basic_bold_25_4bpp(glyphs_Siemens_TIA_Portal_basic_bold_25_4bpp, 17, 30, 25, 0, 0, 4, 1, 0, 0, unicodes_Siemens_TIA_Portal_basic_bold_25_4bpp, kerning_Siemens_TIA_Portal_basic_bold_25_4bpp, 63, 0, 0, &Siemens_TIA_Portal_basic_bold_contextualFormsTable);
+    static touchgfx::GeneratedFont Siemens_TIA_Portal_basic_bold_25_4bpp(glyphs_Siemens_TIA_Portal_basic_bold_25_4bpp, 26, 30, 25, 0, 0, 4, 1, 0, 0, unicodes_Siemens_TIA_Portal_basic_bold_25_4bpp, kerning_Siemens_TIA_Portal_basic_bold_25_4bpp, 63, 0, 0, &Siemens_TIA_Portal_basic_bold_contextualFormsTable);
     return Siemens_TIA_Portal_basic_bold_25_4bpp;
 }

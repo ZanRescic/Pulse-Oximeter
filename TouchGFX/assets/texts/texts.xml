@@ -40,6 +40,6 @@
     <Typography Id="Large" Font="Siemens_TIA_Portal_basic_bold.ttf" Size="40" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
     <Typography Id="Small" Font="verdana.ttf" Size="10" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
     <Typography Id="Typography_00" Font="verdana.ttf" Size="20" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
-    <Typography Id="TextAreas" Font="Siemens_TIA_Portal_basic_bold.ttf" Size="25" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
+    <Typography Id="TextAreas" Font="Siemens_TIA_Portal_basic_bold.ttf" Size="25" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
   </Typographies>
 </TextDatabase>

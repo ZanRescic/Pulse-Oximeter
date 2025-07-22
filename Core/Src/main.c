@@ -890,7 +890,7 @@ void StartDefaultTask(void *argument)
 		}
 		oximeter5_read_temperature(&f_temp);
 	}
-	osDelay(40);
+	osDelay(30);
   }
   /* USER CODE END 5 */
 }

@@ -44,21 +44,19 @@ DataScreenViewBase::DataScreenViewBase()
     textArea3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_4PEZ));
     add(textArea3);
 
-    textArea4.setXY(107, 204);
+    textArea4.setPosition(71, 204, 130, 30);
     textArea4.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     textArea4.setLinespacing(0);
     Unicode::snprintf(textArea4Buffer, TEXTAREA4_SIZE, "%s", touchgfx::TypedText(T_HR_DATA).getText());
     textArea4.setWildcard(textArea4Buffer);
-    textArea4.resizeToCurrentText();
     textArea4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_MADA));
     add(textArea4);
 
-    textArea5.setXY(320, 204);
+    textArea5.setPosition(267, 204, 130, 30);
     textArea5.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     textArea5.setLinespacing(0);
     Unicode::snprintf(textArea5Buffer, TEXTAREA5_SIZE, "%s", touchgfx::TypedText(T_SPO2_DATA).getText());
     textArea5.setWildcard(textArea5Buffer);
-    textArea5.resizeToCurrentText();
     textArea5.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ED91));
     add(textArea5);
 }

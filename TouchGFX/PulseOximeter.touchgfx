@@ -165,9 +165,9 @@
           {
             "Type": "TextArea",
             "Name": "textArea4",
-            "X": 107,
+            "X": 71,
             "Y": 204,
-            "Width": 59,
+            "Width": 130,
             "Height": 30,
             "LockPosition": true,
             "TextId": "__SingleUse_MADA",
@@ -177,7 +177,6 @@
               "Green": 255,
               "Blue": 255
             },
-            "AutoSize": true,
             "Wildcard1": {
               "TextId": "hr_data",
               "UseBuffer": true,
@@ -187,9 +186,9 @@
           {
             "Type": "TextArea",
             "Name": "textArea5",
-            "X": 320,
+            "X": 267,
             "Y": 204,
-            "Width": 25,
+            "Width": 130,
             "Height": 30,
             "LockPosition": true,
             "TextId": "__SingleUse_ED91",
@@ -199,7 +198,6 @@
               "Green": 255,
               "Blue": 255
             },
-            "AutoSize": true,
             "Wildcard1": {
               "TextId": "spo2_data",
               "UseBuffer": true,
