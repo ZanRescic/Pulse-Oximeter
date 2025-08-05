@@ -28,11 +28,11 @@
 ../../TouchGFX/generated/gui_generated/include/gui_generated/datascreen_screen/DataScreenViewBase.hpp:26:18:virtual void DataScreenViewBase::Update_HR()	0	static
 ../../TouchGFX/generated/gui_generated/include/gui_generated/datascreen_screen/DataScreenViewBase.hpp:31:18:virtual void DataScreenViewBase::Update_SpO2()	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp:62:7:touchgfx::TextAreaWithOneWildcard::~TextAreaWithOneWildcard()	0	static
-D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/generated/gui_generated/src/datascreen_screen/DataScreenViewBase.cpp:64:1:DataScreenViewBase::~DataScreenViewBase()	0	static
-D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/generated/gui_generated/src/datascreen_screen/DataScreenViewBase.cpp:69:6:virtual void DataScreenViewBase::setupScreen()	0	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/generated/gui_generated/src/datascreen_screen/DataScreenViewBase.cpp:63:1:DataScreenViewBase::~DataScreenViewBase()	0	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/generated/gui_generated/src/datascreen_screen/DataScreenViewBase.cpp:68:6:virtual void DataScreenViewBase::setupScreen()	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/TypedText.hpp:65:13:virtual touchgfx::TypedText::~TypedText()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp:62:7:virtual touchgfx::TextAreaWithOneWildcard::~TextAreaWithOneWildcard()	8	static
-D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/generated/gui_generated/src/datascreen_screen/DataScreenViewBase.cpp:64:1:virtual DataScreenViewBase::~DataScreenViewBase()	8	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/generated/gui_generated/src/datascreen_screen/DataScreenViewBase.cpp:63:1:virtual DataScreenViewBase::~DataScreenViewBase()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp:111:18:virtual void touchgfx::TextArea::setBaselineY(int16_t)	16	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp:127:18:virtual void touchgfx::TextArea::setXBaselineY(int16_t, int16_t)	16	static
 D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/generated/gui_generated/src/datascreen_screen/DataScreenViewBase.cpp:9:1:DataScreenViewBase::DataScreenViewBase()	72	static

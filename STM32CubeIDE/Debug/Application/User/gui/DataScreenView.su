@@ -4,9 +4,10 @@
 ../../TouchGFX/generated/gui_generated/include/gui_generated/datascreen_screen/DataScreenViewBase.hpp:26:18:virtual void DataScreenViewBase::Update_HR()	0	static
 ../../TouchGFX/generated/gui_generated/include/gui_generated/datascreen_screen/DataScreenViewBase.hpp:31:18:virtual void DataScreenViewBase::Update_SpO2()	0	static
 D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/gui/src/datascreen_screen/DataScreenView.cpp:12:6:virtual void DataScreenView::tearDownScreen()	0	static
-../../TouchGFX/gui/include/gui/datascreen_screen/DataScreenView.hpp:11:13:DataScreenView::~DataScreenView()	8	static
-../../TouchGFX/gui/include/gui/datascreen_screen/DataScreenView.hpp:11:13:virtual DataScreenView::~DataScreenView()	8	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/gui/src/datascreen_screen/DataScreenView.cpp:33:5:virtual int DataScreenView::Calc_Ticks(int32_t)	4	static
+../../TouchGFX/gui/include/gui/datascreen_screen/DataScreenView.hpp:12:13:DataScreenView::~DataScreenView()	8	static
+../../TouchGFX/gui/include/gui/datascreen_screen/DataScreenView.hpp:12:13:virtual DataScreenView::~DataScreenView()	8	static
 D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/gui/src/datascreen_screen/DataScreenView.cpp:2:1:DataScreenView::DataScreenView()	8	static
 D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/gui/src/datascreen_screen/DataScreenView.cpp:7:6:virtual void DataScreenView::setupScreen()	0	static
-D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/gui/src/datascreen_screen/DataScreenView.cpp:17:6:virtual void DataScreenView::Update_HR(int32_t)	24	static
-D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/gui/src/datascreen_screen/DataScreenView.cpp:27:6:virtual void DataScreenView::Update_SpO2(uint8_t)	16	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/gui/src/datascreen_screen/DataScreenView.cpp:27:6:virtual void DataScreenView::Update_SpO2(uint8_t)	8	static
+D:/Faks-Zan/3.LETNIK/1.SEMESTER/VS/Project/PulseOximeter/TouchGFX/gui/src/datascreen_screen/DataScreenView.cpp:17:6:virtual void DataScreenView::Update_HR(int32_t)	16	static

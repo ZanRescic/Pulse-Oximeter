@@ -25,7 +25,6 @@ DataScreenViewBase::DataScreenViewBase()
     animatedImage1.setXY(86, 86);
     animatedImage1.setBitmaps(BITMAP_HEARTLOGO100X100_ID, BITMAP_HEARTLOGO110X110_ID);
     animatedImage1.setUpdateTicksInterval(18);
-    animatedImage1.startAnimation(false, true, true);
     add(animatedImage1);
 
     image1.setXY(282, 86);

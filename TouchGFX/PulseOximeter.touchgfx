@@ -115,7 +115,6 @@
             "FileNameFirst": "HeartLogo100x100.png",
             "FileNameLast": "HeartLogo110x110.png",
             "UpdateTicksInterval": 300,
-            "StartOnLoad": true,
             "LoopEnabled": true
           },
           {

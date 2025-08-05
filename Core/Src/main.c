@@ -23,7 +23,6 @@
 #include "libjpeg.h"
 #include "app_touchgfx.h"
 #include "oximeter5.h"
-#include <string.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -100,10 +99,17 @@ osMessageQueueId_t dataQueueHandle;
 const osMessageQueueAttr_t dataQueue_attributes = {
   .name = "dataQueue"
 };
+/* Definitions for semaphores controlling sampling and calculation */
+osSemaphoreId_t sampleReadyHandle;
+const osSemaphoreAttr_t sampleReady_attributes = {
+  .name = "sampleReady"
+};
+osSemaphoreId_t processingDoneHandle;
+const osSemaphoreAttr_t processingDone_attributes = {
+  .name = "processingDone"
+};
 /* USER CODE BEGIN PV */
 #define BUFFER_SIZE 100
-
-char sendBuffer[BUFFER_SIZE];
 static uint32_t aun_ir_buffer[ BUFFER_SIZE ]; //infra red LED buffer 100
 static uint32_t aun_red_buffer[ BUFFER_SIZE ]; //red LED buffer 100
 static uint32_t un_min, un_max, un_prev_data, un_brightness;
@@ -112,8 +118,8 @@ static uint8_t n_spo2;
 static uint8_t max_spo2;
 static int32_t n_heart_rate;
 static int32_t valid_heart_rate;
-static uint8_t spo2_array[25];
-static int32_t hr_array[25];
+static uint8_t spo2_array[20];
+static int32_t hr_array[20];
 static int counter;
 
 typedef struct {
@@ -218,7 +224,8 @@ int main(void)
   /* USER CODE END RTOS_MUTEX */
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
-  /* add semaphores, ... */
+  sampleReadyHandle = osSemaphoreNew(1, 0, &sampleReady_attributes);
+  processingDoneHandle = osSemaphoreNew(1, 0, &processingDone_attributes);
   /* USER CODE END RTOS_SEMAPHORES */
 
   /* USER CODE BEGIN RTOS_TIMERS */
@@ -890,7 +897,9 @@ void StartDefaultTask(void *argument)
 		}
 		oximeter5_read_temperature(&f_temp);
 	}
-	osDelay(30);
+	osSemaphoreRelease(sampleReadyHandle);
+	osSemaphoreAcquire(processingDoneHandle, osWaitForever);
+	osDelay(40);
   }
   /* USER CODE END 5 */
 }
@@ -913,6 +922,7 @@ void InitializeEquipment(void *argument)
 	un_brightness = 0;
 	un_min = 0x3FFFF;
 	un_max = 0;
+	counter = 0;
 
 	for ( uint8_t n_cnt = 0; n_cnt < 100; n_cnt++ )
 	{
@@ -931,6 +941,7 @@ void InitializeEquipment(void *argument)
 		}
 	}
 	osDelay(100);
+
 	//Deleting the task because it's supposed to run once, to init the sensor
 	vTaskDelete(NULL);
   /* USER CODE END InitializeEquipment */
@@ -949,6 +960,7 @@ void CalculateData(void *argument)
   /* Infinite loop */
   for(;;)
   {
+	osSemaphoreAcquire(sampleReadyHandle, osWaitForever);
 	oximeter5_get_oxygen_saturation(&aun_ir_buffer[ 0 ], 100, &aun_red_buffer[ 0 ], &n_spo2 );
 	oximeter5_get_heart_rate( &aun_ir_buffer[ 0 ], 100, &aun_red_buffer[ 0 ], &n_heart_rate );
 
@@ -958,21 +970,16 @@ void CalculateData(void *argument)
 		counter++;
 	}
 
-	if (counter == 10) {
-		max_spo2 = maxSpo2(spo2_array, (sizeof(spo2_array) / sizeof(spo2_array[0])));
-		valid_heart_rate = getHeartRate(hr_array, (sizeof(hr_array) / sizeof(hr_array[0])));
-
-		//snprintf(SendBuffer,BUFSIZE,"\tSPO2: %u %%\r\n", max_spo2);
-		//HAL_UART_Transmit(&huart3,SendBuffer,strlen(SendBuffer),100);
-
-		//snprintf(SendBuffer,BUFSIZE,"\tHR: %ld %\r\n", valid_heart_rate);
-		//HAL_UART_Transmit(&huart3,SendBuffer,strlen(SendBuffer),100);
+	if (counter == 20) {
+		max_spo2 = maxSpo2(spo2_array, sizeof(spo2_array)/sizeof(spo2_array[0]));
+		valid_heart_rate = getHeartRate(hr_array, sizeof(hr_array)/sizeof(hr_array[0]));
 		healthData.hr = valid_heart_rate;
 		healthData.sp02 = max_spo2;
 		osMessageQueuePut(dataQueueHandle, &healthData, 0, 0);
 		counter = 0;
 	}
-    osDelay(10);
+	osSemaphoreRelease(processingDoneHandle);
+    osDelay(40);
   }
   /* USER CODE END CalculateData */
 }

@@ -1,7 +1,5 @@
 #include "oximeter5.h"
 #include "main.h"
-#include <stdint.h>
-#include <stdio.h>
 
 #define SAMPLING_FREQUENCY          25
 #define BUFFER_SIZE                 ( SAMPLING_FREQUENCY * 4 )
