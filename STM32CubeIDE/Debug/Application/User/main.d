@@ -58,7 +58,6 @@ Application/User/main.o: \
  ../../Middlewares/Third_Party/LibJPEG/include/jpeglib.h \
  ../../LIBJPEG/Target/jconfig.h ../../LIBJPEG/Target/jdata_conf.h \
  ../../LIBJPEG/Target/jmorecfg.h ../../TouchGFX/App/app_touchgfx.h \
- ../../Core/Inc/oximeter5.h \
  ../../Drivers/BSP/STM32H750B-DK/stm32h750b_discovery_qspi.h \
  ../../Core/Inc/stm32h750b_discovery_conf.h \
  ../../Drivers/BSP/STM32H750B-DK/stm32h750b_discovery_errno.h \
@@ -66,7 +65,7 @@ Application/User/main.o: \
  ../../Core/Inc/mt25tl01g_conf.h \
  ../../Drivers/BSP/STM32H750B-DK/stm32h750b_discovery_sdram.h \
  ../../Drivers/BSP/STM32H750B-DK/../Components/mt48lc4m32b2/mt48lc4m32b2.h \
- ../../Core/Inc/mt48lc4m32b2_conf.h
+ ../../Core/Inc/mt48lc4m32b2_conf.h ../../Core/Inc/oximeter5.h
 ../../Core/Inc/main.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../../Core/Inc/stm32h7xx_hal_conf.h:
@@ -127,7 +126,6 @@ Application/User/main.o: \
 ../../LIBJPEG/Target/jdata_conf.h:
 ../../LIBJPEG/Target/jmorecfg.h:
 ../../TouchGFX/App/app_touchgfx.h:
-../../Core/Inc/oximeter5.h:
 ../../Drivers/BSP/STM32H750B-DK/stm32h750b_discovery_qspi.h:
 ../../Core/Inc/stm32h750b_discovery_conf.h:
 ../../Drivers/BSP/STM32H750B-DK/stm32h750b_discovery_errno.h:
@@ -136,3 +134,4 @@ Application/User/main.o: \
 ../../Drivers/BSP/STM32H750B-DK/stm32h750b_discovery_sdram.h:
 ../../Drivers/BSP/STM32H750B-DK/../Components/mt48lc4m32b2/mt48lc4m32b2.h:
 ../../Core/Inc/mt48lc4m32b2_conf.h:
+../../Core/Inc/oximeter5.h:

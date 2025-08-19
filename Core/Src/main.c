@@ -22,12 +22,12 @@
 #include "cmsis_os.h"
 #include "libjpeg.h"
 #include "app_touchgfx.h"
-#include "oximeter5.h"
-
+#include <stdlib.h>
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "stm32h750b_discovery_qspi.h"
 #include "stm32h750b_discovery_sdram.h"
+#include "oximeter5.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -53,6 +53,8 @@ CRC_HandleTypeDef hcrc;
 DMA2D_HandleTypeDef hdma2d;
 
 I2C_HandleTypeDef hi2c4;
+DMA_HandleTypeDef hdma_i2c4_rx;
+DMA_HandleTypeDef hdma_i2c4_tx;
 
 JPEG_HandleTypeDef hjpeg;
 MDMA_HandleTypeDef hmdma_jpeg_infifo_th;
@@ -135,6 +137,7 @@ void SystemClock_Config(void);
 static void MPU_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_MDMA_Init(void);
+static void MX_BDMA_Init(void);
 static void MX_LTDC_Init(void);
 static void MX_DMA2D_Init(void);
 static void MX_QUADSPI_Init(void);
@@ -151,7 +154,7 @@ void CalculateData(void *argument);
 /* USER CODE BEGIN PFP */
 uint8_t maxSpo2(uint8_t *array, int size);
 int32_t getHeartRate(int32_t *array, int size);
-void bubbleSort(int32_t *array, int size);
+int compare(const void *a, const void *b);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -201,6 +204,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_MDMA_Init();
+  MX_BDMA_Init();
   MX_LTDC_Init();
   MX_DMA2D_Init();
   MX_FMC_Init();
@@ -276,42 +280,28 @@ int main(void)
   }
   /* USER CODE END 3 */
 }
+
 uint8_t maxSpo2(uint8_t *array, int size) {
 	uint8_t max = array[0];
 	for (uint8_t i = 1; i < size; i++) {
 		if (max < array[i])
 			max = array[i];
 	}
-	memset(array, 0, size);
 	return max;
 }
 
 int32_t getHeartRate(int32_t *array, int size) {
-	bubbleSort(array, size);
-	if (size % 2 == 0) {
+	qsort(array, size, sizeof(int32_t), compare);
+	if (size % 2 == 0)
 		return (array[size / 2 - 1] + array[size / 2]) / 2;
-	} else {
+	else
 		return array[size / 2];
-	}
 }
 
-void bubbleSort(int32_t *array, int size) {
-    int32_t temp;
-    int swapped;
-    for (size_t i = 0; i < size - 1; i++) {
-        swapped = 0;
-        for (size_t j = 0; j < size - i - 1; j++) {
-            if (array[j] > array[j + 1]) {
-                temp = array[j];
-                array[j] = array[j + 1];
-                array[j + 1] = temp;
-                swapped = 1;
-            }
-        }
-        if (!swapped) {
-            break;
-        }
-    }
+int compare(const void *pa, const void *pb) {
+	int32_t a = *(const int32_t*)pa;
+	int32_t b = *(const int32_t*)pb;
+	return (a > b) - (a < b);
 }
 
 /**
@@ -673,6 +663,28 @@ static void MX_USART3_UART_Init(void)
 }
 
 /**
+  * Enable DMA controller clock
+  */
+static void MX_BDMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_BDMA_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMAMUX2_OVR_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMAMUX2_OVR_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMAMUX2_OVR_IRQn);
+  /* BDMA_Channel0_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(BDMA_Channel0_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(BDMA_Channel0_IRQn);
+  /* BDMA_Channel1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(BDMA_Channel1_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(BDMA_Channel1_IRQn);
+
+}
+
+/**
   * Enable MDMA controller clock
   */
 static void MX_MDMA_Init(void)
@@ -817,14 +829,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(MCU_ACTIVE_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PD12 PD13 */
-  GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_13;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  GPIO_InitStruct.Alternate = GPIO_AF4_I2C4;
-  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
-
   /* USER CODE BEGIN MX_GPIO_Init_2 */
   /* USER CODE END MX_GPIO_Init_2 */
 }
@@ -851,49 +855,35 @@ void StartDefaultTask(void *argument)
 		aun_ir_buffer[ n_cnt - 25 ] = aun_ir_buffer[ n_cnt ];
 
 		if ( un_min > aun_red_buffer[ n_cnt ] )
-		{
 			un_min = aun_red_buffer[ n_cnt ];
-		}
-
 		if ( un_max < aun_red_buffer[ n_cnt ] )
-		{
 			un_max=aun_red_buffer[n_cnt];
-		}
 	}
 
 	for ( uint8_t n_cnt = 75; n_cnt < 100; n_cnt++ ){
 		un_prev_data = aun_red_buffer[ n_cnt - 1 ];
 		while ( oximeter5_check_interrupt() == OXIMETER5_INTERRUPT_ACTIVE );
-
 		oximeter5_read_sensor_data(&aun_ir_buffer[ n_cnt ], &aun_red_buffer[ n_cnt ]);
 
-		if ( aun_red_buffer[ n_cnt ] > un_prev_data )
-		{
+		if ( aun_red_buffer[ n_cnt ] > un_prev_data ){
 			f_temp = aun_red_buffer[ n_cnt ]-un_prev_data;
 			f_temp /= ( un_max - un_min );
 			f_temp *= MAX_BRIGHTNESS;
 			f_temp = un_brightness - f_temp;
 
 			if ( f_temp < 0 )
-			{
 				un_brightness = 0;
-			}
 			else
-			{
 				un_brightness = ( uint32_t ) f_temp;
-			}
 		}
-		else
-		{
+		else {
 			f_temp = un_prev_data - aun_red_buffer[ n_cnt ];
 			f_temp /= ( un_max - un_min );
 			f_temp *= MAX_BRIGHTNESS;
 			un_brightness += ( uint32_t ) f_temp;
 
 			if ( un_brightness > MAX_BRIGHTNESS )
-			{
 				un_brightness = MAX_BRIGHTNESS;
-			}
 		}
 		oximeter5_read_temperature(&f_temp);
 	}
@@ -927,21 +917,14 @@ void InitializeEquipment(void *argument)
 	for ( uint8_t n_cnt = 0; n_cnt < 100; n_cnt++ )
 	{
 		while ( oximeter5_check_interrupt() == OXIMETER5_INTERRUPT_ACTIVE );
-
 		oximeter5_read_sensor_data(&aun_ir_buffer[ n_cnt ], &aun_red_buffer[ n_cnt ] );
-
 		if ( un_min > aun_red_buffer[ n_cnt ] )
-		{
 			un_min = aun_red_buffer[ n_cnt ];
-		}
 
 		if ( un_max < aun_red_buffer[ n_cnt ] )
-		{
 			un_max = aun_red_buffer[ n_cnt ];
-		}
 	}
 	osDelay(100);
-
 	//Deleting the task because it's supposed to run once, to init the sensor
 	vTaskDelete(NULL);
   /* USER CODE END InitializeEquipment */

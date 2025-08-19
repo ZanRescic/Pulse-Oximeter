@@ -27,6 +27,7 @@ const uint8_t uch_spo2_table[ 184 ] =
 
 //used for I2C communication
 extern I2C_HandleTypeDef hi2c4;
+HAL_StatusTypeDef retval;
 
 /**
  * @brief Oximeter 5 find peaks above n_min_height function.
@@ -61,12 +62,12 @@ static void dev_find_peaks ( int32_t *pn_locs, int32_t *n_npks,  int32_t  *pn_x,
 
 err_t oximeter5_init ( void )
 {
-        HAL_StatusTypeDef retval = HAL_ERROR;
-        while (retval != HAL_OK){
-                retval = HAL_I2C_IsDeviceReady(&hi2c4, (OXIMETER5_SET_DEV_ADDR << 1), 3, 100);
-                HAL_Delay(1000);
-        }
-        return OXIMETER5_OK;
+	retval = HAL_ERROR;
+	while (retval != HAL_OK){
+		retval = HAL_I2C_IsDeviceReady(&hi2c4, (OXIMETER5_SET_DEV_ADDR << 1), 3, 100);
+		HAL_Delay(1000);
+	}
+	return OXIMETER5_OK;
 }
 
 err_t oximeter5_default_cfg ( void )
@@ -131,12 +132,12 @@ err_t oximeter5_default_cfg ( void )
 
 err_t oximeter5_generic_write ( uint8_t reg, uint8_t *tx_buf, uint8_t tx_len )
 {
-        return HAL_I2C_Mem_Write(&hi2c4, (OXIMETER5_SET_DEV_ADDR << 1), reg, I2C_MEMADD_SIZE_8BIT, tx_buf, tx_len, HAL_MAX_DELAY);
+	return HAL_I2C_Mem_Write(&hi2c4, (OXIMETER5_SET_DEV_ADDR << 1), reg, I2C_MEMADD_SIZE_8BIT, tx_buf, tx_len, HAL_MAX_DELAY);
 }
 
 err_t oximeter5_generic_read ( uint8_t reg, uint8_t *rx_buf, uint8_t rx_len )
 {
-        return HAL_I2C_Mem_Read(&hi2c4, (OXIMETER5_SET_DEV_ADDR << 1), reg, I2C_MEMADD_SIZE_8BIT, rx_buf, rx_len, HAL_MAX_DELAY);
+	return HAL_I2C_Mem_Read(&hi2c4, (OXIMETER5_SET_DEV_ADDR << 1), reg, I2C_MEMADD_SIZE_8BIT, rx_buf, rx_len, HAL_MAX_DELAY);
 }
 
 uint8_t oximeter5_check_interrupt ( void )

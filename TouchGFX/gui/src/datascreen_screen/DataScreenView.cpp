@@ -32,6 +32,7 @@ void DataScreenView::Update_SpO2(uint8_t sp02)
 
 int DataScreenView::Calc_Ticks(int32_t hr)
 {
+	//Linear interpolation to calculate heart rate's animation speed
 	if (hr < minHR) hr = minHR;
 	else if (hr > maxHR) hr = maxHR;
 	float scale = float(maxTicks - minTicks) / float(maxHR - minHR);

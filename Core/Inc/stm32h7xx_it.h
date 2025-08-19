@@ -56,8 +56,13 @@ void DebugMon_Handler(void);
 void TIM6_DAC_IRQHandler(void);
 void LTDC_IRQHandler(void);
 void DMA2D_IRQHandler(void);
+void I2C4_EV_IRQHandler(void);
+void I2C4_ER_IRQHandler(void);
 void JPEG_IRQHandler(void);
 void MDMA_IRQHandler(void);
+void DMAMUX2_OVR_IRQHandler(void);
+void BDMA_Channel0_IRQHandler(void);
+void BDMA_Channel1_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */
