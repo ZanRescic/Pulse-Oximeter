@@ -4,17 +4,9 @@ An embedded application for measuring and displaying heart rate and blood oxygen
 
 ## Features
 - Initializes the MAX30102 sensor and gathers red/infrared samples.
-- Calculates SpO₂ and heart rate in a FreeRTOS task.
-- Sends calculated data through a message queue to the GUI model, which updates the onscreen values and heart animation.
+- Calculates SpO₂ and heart rate.
+- Sends calculated data to the GUI model, which updates the onscreen values and heart animation.
 - TouchGFX UI with a start screen and a data screen for real-time readings.
-
-## Project Structure
-| Path | Description |
-| ---- | ----------- |
-| `Core/` | Application code, RTOS tasks, hardware initialization |
-| `TouchGFX/` | GUI assets and generated code from TouchGFX Designer |
-| `Drivers/` | STM32 HAL and board support packages |
-| `Middlewares/` | FreeRTOS, LibJPEG, and other middleware components |
 
 ## Build & Run
 1. **Hardware**:  
@@ -27,7 +19,3 @@ An embedded application for measuring and displaying heart rate and blood oxygen
 4. **Usage**:  
    - On boot, the device initializes the sensor, samples data, and transitions to the data screen.  
    - Heart rate and SpO₂ values update continuously on screen.
-
-## Modifying the GUI
-- Open `TouchGFX/PulseOximeter.touchgfx` in **TouchGFX Designer** to edit screens or assets.
-- After saving, regenerate code and rebuild in STM32CubeIDE.
