@@ -1,5 +1,8 @@
 #include "oximeter5.h"
 #include "main.h"
+#include "FreeRTOS.h"
+#include "semphr.h"
+#include <string.h>
 
 #define SAMPLING_FREQUENCY          25
 #define BUFFER_SIZE                 ( SAMPLING_FREQUENCY * 4 )
@@ -28,6 +31,16 @@ const uint8_t uch_spo2_table[ 184 ] =
 //used for I2C communication
 extern I2C_HandleTypeDef hi2c4;
 HAL_StatusTypeDef retval;
+
+/* DMA transfer buffer size (sized for largest transfer: 6-byte FIFO read) */
+#define I2C_DMA_BUF_SIZE    16
+
+/* Buffers must reside in RAM_D3 (SRAM4) so the BDMA controller can access them */
+__attribute__((section(".SRAM4"))) static uint8_t i2c_dma_tx_buf[I2C_DMA_BUF_SIZE];
+__attribute__((section(".SRAM4"))) static uint8_t i2c_dma_rx_buf[I2C_DMA_BUF_SIZE];
+
+/* Binary semaphore released by DMA-complete/error callbacks to unblock the caller */
+static SemaphoreHandle_t i2c_dma_semaphore = NULL;
 
 /**
  * @brief Oximeter 5 find peaks above n_min_height function.
@@ -62,6 +75,8 @@ static void dev_find_peaks ( int32_t *pn_locs, int32_t *n_npks,  int32_t  *pn_x,
 
 err_t oximeter5_init ( void )
 {
+	i2c_dma_semaphore = xSemaphoreCreateBinary();
+
 	retval = HAL_ERROR;
 	while (retval != HAL_OK){
 		retval = HAL_I2C_IsDeviceReady(&hi2c4, (OXIMETER5_SET_DEV_ADDR << 1), 3, 100);
@@ -132,12 +147,24 @@ err_t oximeter5_default_cfg ( void )
 
 err_t oximeter5_generic_write ( uint8_t reg, uint8_t *tx_buf, uint8_t tx_len )
 {
-	return HAL_I2C_Mem_Write(&hi2c4, (OXIMETER5_SET_DEV_ADDR << 1), reg, I2C_MEMADD_SIZE_8BIT, tx_buf, tx_len, HAL_MAX_DELAY);
+	memcpy(i2c_dma_tx_buf, tx_buf, tx_len);
+	if (HAL_I2C_Mem_Write_DMA(&hi2c4, (OXIMETER5_SET_DEV_ADDR << 1),
+	                           reg, I2C_MEMADD_SIZE_8BIT,
+	                           i2c_dma_tx_buf, tx_len) != HAL_OK)
+		return OXIMETER5_ERROR;
+	xSemaphoreTake(i2c_dma_semaphore, portMAX_DELAY);
+	return OXIMETER5_OK;
 }
 
 err_t oximeter5_generic_read ( uint8_t reg, uint8_t *rx_buf, uint8_t rx_len )
 {
-	return HAL_I2C_Mem_Read(&hi2c4, (OXIMETER5_SET_DEV_ADDR << 1), reg, I2C_MEMADD_SIZE_8BIT, rx_buf, rx_len, HAL_MAX_DELAY);
+	if (HAL_I2C_Mem_Read_DMA(&hi2c4, (OXIMETER5_SET_DEV_ADDR << 1),
+	                          reg, I2C_MEMADD_SIZE_8BIT,
+	                          i2c_dma_rx_buf, rx_len) != HAL_OK)
+		return OXIMETER5_ERROR;
+	xSemaphoreTake(i2c_dma_semaphore, portMAX_DELAY);
+	memcpy(rx_buf, i2c_dma_rx_buf, rx_len);
+	return OXIMETER5_OK;
 }
 
 uint8_t oximeter5_check_interrupt ( void )
@@ -600,3 +627,29 @@ static void dev_find_peaks ( int32_t *pn_locs, int32_t *n_npks,  int32_t  *pn_x,
     }
 }
 
+void HAL_I2C_MemTxCpltCallback(I2C_HandleTypeDef *hi2c)
+{
+	if (hi2c->Instance == I2C4 && i2c_dma_semaphore != NULL) {
+		BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+		xSemaphoreGiveFromISR(i2c_dma_semaphore, &xHigherPriorityTaskWoken);
+		portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+	}
+}
+
+void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c)
+{
+	if (hi2c->Instance == I2C4 && i2c_dma_semaphore != NULL) {
+		BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+		xSemaphoreGiveFromISR(i2c_dma_semaphore, &xHigherPriorityTaskWoken);
+		portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+	}
+}
+
+void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c)
+{
+	if (hi2c->Instance == I2C4 && i2c_dma_semaphore != NULL) {
+		BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+		xSemaphoreGiveFromISR(i2c_dma_semaphore, &xHigherPriorityTaskWoken);
+		portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+	}
+}

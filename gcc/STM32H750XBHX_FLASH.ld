@@ -246,4 +246,14 @@ SECTIONS
   TouchGFX_Framebuffer1 (NOLOAD) : { *(TouchGFX_Framebuffer1) } >SDRAM
   TouchGFX_Framebuffer2 (NOLOAD) : { *(TouchGFX_Framebuffer2) } >SDRAM
   Video_RGB_Buffer (NOLOAD) : { *(Video_RGB_Buffer) } >SDRAM
+
+  /* I2C DMA buffers – must be in RAM_D3 (SRAM4) for BDMA access */
+  .SRAM4 (NOLOAD) :
+  {
+    . = ALIGN(4);
+    *(.SRAM4)
+    *(.SRAM4*)
+    . = ALIGN(4);
+  } >RAM_D3
+
 }
